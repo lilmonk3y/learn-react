@@ -1,0 +1,29 @@
+.todo_item {
+    width: calc(100% - 62px);
+    list-style-type: none;
+    background-color: cornsilk;
+    border-radius: 30px;
+    padding: 0 30px ;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    position: relative;
+    align-items: center;
+}
+
+.todo_item_completed {
+    text-decoration: line-through;
+}
+
+.todo_item_icon {
+    /*position: absolute;*/
+    /*top: -24px;*/
+    /*right: 0;*/
+    width: 30px;
+    height: 30px;
+}
+
+.todo_item_icon:hover {
+    color: red;
+}

@@ -1,0 +1,19 @@
+.search {
+    text-align: center;
+}
+
+
+.search_button {
+    border-color: transparent;
+    border-radius: 10px;
+}
+
+.search_button:hover {
+    border-color: black;
+}
+
+.search_button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
+    border-color: transparent;
+}
