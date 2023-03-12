@@ -8,12 +8,12 @@ import {TodoAdd} from "../TodoAdd/TodoAdd";
 import {useLocalStorage} from "../Storage/useLocalStorage";
 
 function App() {
-  const { loading, error, item, saveItem } = useLocalStorage()
-  const [todos, setTodos] = React.useState( item )
+  const { loading, error, item, saveItem } = useLocalStorage();
+  const [todos, setTodos] = React.useState( item );
   const [searchValue, setSearchValue] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
 
-  saveItem(todos)
+  saveItem(todos);
 
   return (
     <TodoContext.Provider value={{
@@ -35,7 +35,8 @@ function App() {
 
       <TodoAdd/>
 
-    </TodoContext.Provider> )
+    </TodoContext.Provider>
+  );
 }
 
 export default App;

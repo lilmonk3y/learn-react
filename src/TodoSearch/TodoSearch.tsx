@@ -1,9 +1,9 @@
-import './TodoSearch.css'
+import './TodoSearch.css';
 import React from "react";
 import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
 
 function TodoSearch() {
-    const {searchValue, setSearchValue} = React.useContext(TodoContext) as TodoContextType
+    const {searchValue, setSearchValue} = React.useContext(TodoContext) as TodoContextType;
 
     return (
         <div className="search" >
@@ -13,7 +13,7 @@ function TodoSearch() {
                 value={searchValue}
                 onChange={(event) => setSearchValue(event.target.value)}/>
         </div>
-    )
+    );
 }
 
 export {TodoSearch}

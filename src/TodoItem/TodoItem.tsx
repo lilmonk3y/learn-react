@@ -1,6 +1,6 @@
-import './TodoItem.css'
+import './TodoItem.css';
 import React from "react";
-import {MdOutlineDeleteOutline} from 'react-icons/md'
+import {MdOutlineDeleteOutline} from 'react-icons/md';
 import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
 
 interface TodoItemProps {
@@ -9,23 +9,21 @@ interface TodoItemProps {
 }
 
 function TodoItem(props: TodoItemProps) {
-  const {setTodos} = React.useContext(TodoContext) as TodoContextType
+  const {setTodos} = React.useContext(TodoContext) as TodoContextType;
 
   const onSelected = () => {
-    console.log('voy a modificar la tarea: ' + props.text)
-
     setTodos(prevTodos => (
       prevTodos.map(todo => (
         todo.text === props.text ?
           {text: todo.text, completed: !todo.completed} :
           todo
       ))
-    ))
+    ));
   }
 
   const deleteTodo = (event: React.MouseEvent<HTMLOrSVGElement>) => {
-    setTodos((prevTodos) => prevTodos.filter(todo => !(todo.text === props.text)))
-    event.stopPropagation()
+    setTodos((prevTodos) => prevTodos.filter(todo => !(todo.text === props.text)));
+    event.stopPropagation();
   }
 
   return (
@@ -40,7 +38,7 @@ function TodoItem(props: TodoItemProps) {
           onClick={(event) => deleteTodo(event)}
         />
     </li>
-  )
+  );
 }
 
 export {TodoItem}

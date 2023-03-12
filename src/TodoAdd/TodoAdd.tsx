@@ -1,10 +1,10 @@
-import './TodoAdd.css'
+import './TodoAdd.css';
 import React from "react";
 import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
 import {NewTodoModal} from "../NewTodoModal/NewTodoModal";
 
 function TodoAdd() {
-  const {setModalVisible} = React.useContext(TodoContext) as TodoContextType
+  const {setModalVisible} = React.useContext(TodoContext) as TodoContextType;
 
   return (
     <>
@@ -16,7 +16,7 @@ function TodoAdd() {
       </button>
       <NewTodoModal/>
     </>
-  )
+  );
 }
 
 export {TodoAdd}

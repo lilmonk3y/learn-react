@@ -1,32 +1,31 @@
 import ReactDOM from "react-dom";
-import './NewTodoModal.css'
+import './NewTodoModal.css';
 import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
 import React, {FormEvent} from "react";
 
-
 function NewTodoModal() {
-  return ReactDOM.createPortal((
-    <NewTodo/>
-    ), document.getElementById('modal') as HTMLElement)
+  return ReactDOM.createPortal(
+    <NewTodo/>,
+    document.getElementById('modal') as HTMLElement);
 }
 
 function NewTodo() {
-  const {modalVisible, setModalVisible, setTodos} = React.useContext(TodoContext) as TodoContextType
+  const {modalVisible, setModalVisible, setTodos} = React.useContext(TodoContext) as TodoContextType;
 
-  const closeModal = () => setModalVisible(false)
+  const closeModal = () => setModalVisible(false);
 
   const addTodo = () => {
-    let input = document.getElementById('modal_input') as HTMLInputElement
+    let input = document.getElementById('modal_input') as HTMLInputElement;
 
-    setTodos(prevState => prevState.concat([{text: input.value, completed: false}]))
+    setTodos(prevState => prevState.concat([{text: input.value, completed: false}]));
 
-    setModalVisible(false)
+    setModalVisible(false);
   }
 
   const submitForm = (event :FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    addTodo()
+    addTodo();
   }
 
   return(
@@ -48,14 +47,14 @@ function NewTodo() {
                 autoComplete='off'
               />
               <div className='button_box'>
-                <button className='button_cancel' onClick={closeModal}>Cancelar</button>
-                <button className='button_submit' onClick={addTodo}>Agregar</button>
+                <button className='button_cancel' onClick={closeModal} type='button'>Cancelar</button>
+                <button className='button_submit' onClick={addTodo} type='button'>Agregar</button>
               </div>
             </form>
           </div>
       )}
     </>
-  )
+  );
 }
 
 export {NewTodoModal}
