@@ -1,11 +1,15 @@
 import './TodoAdd.css';
 import React from "react";
-import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
 import {NewTodoModal} from "../NewTodoModal/NewTodoModal";
+import {Todo} from "../Todo/Todo";
 
-function TodoAdd() {
-  const {setModalVisible} = React.useContext(TodoContext) as TodoContextType;
+interface TodoAddType {
+    setModalVisible :React.Dispatch<React.SetStateAction<boolean>>,
+    modalVisible : boolean,
+    setTodos :React.Dispatch<React.SetStateAction<Todo[]>>,
+}
 
+function TodoAdd({ setModalVisible, setTodos, modalVisible } : TodoAddType) {
   return (
     <>
       <button
@@ -14,7 +18,7 @@ function TodoAdd() {
       >
         +
       </button>
-      <NewTodoModal/>
+      <NewTodoModal setTodos={setTodos} modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </>
   );
 }

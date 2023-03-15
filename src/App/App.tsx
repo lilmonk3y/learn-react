@@ -1,41 +1,33 @@
 import React from 'react';
 import './App.css';
-import {TodoContext} from "../TodoContext/TodoContext";
 import {Title} from "../Title/Title";
 import {TodoSearch} from "../TodoSearch/TodoSearch";
 import {TodoContainer} from "../TodoContainer/TodoContainer";
 import {TodoAdd} from "../TodoAdd/TodoAdd";
-import {useLocalStorage} from "../Storage/useLocalStorage";
+import useTodos from "./useTodos";
 
 function App() {
-  const { loading, error, item, saveItem } = useLocalStorage();
-  const [todos, setTodos] = React.useState( item );
-  const [searchValue, setSearchValue] = React.useState('');
-  const [modalVisible, setModalVisible] = React.useState(false);
-
-  saveItem(todos);
-
-  return (
-    <TodoContext.Provider value={{
+  const {
+      loading,
+      error,
       todos,
       setTodos,
       searchValue,
       setSearchValue,
       modalVisible,
       setModalVisible,
-      loading,
-      error
-    }}>
+  } = useTodos();
 
-      <Title/>
+  return (
+  <>
+      <Title todos={todos}/>
 
-      <TodoSearch/>
+      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
 
-      <TodoContainer/>
+      <TodoContainer todos={todos} loading={loading} searchValue={searchValue} error={error} setTodos={setTodos}/>
 
-      <TodoAdd/>
-
-    </TodoContext.Provider>
+      <TodoAdd setModalVisible={setModalVisible} setTodos={setTodos} modalVisible={modalVisible} />
+  </>
   );
 }
 

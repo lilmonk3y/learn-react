@@ -1,10 +1,12 @@
 import React from "react";
 import './Title.css';
-import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
+import {Todo} from "../Todo/Todo";
 
-function Title() {
-    const {todos} = React.useContext(TodoContext) as TodoContextType;
+interface TitleProps {
+    todos : Todo[]
+}
 
+function Title({todos} : TitleProps) {
     const completed = todos.filter(todo => todo.completed).length;
     const total = todos.length;
     return (

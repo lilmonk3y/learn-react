@@ -1,10 +1,12 @@
 import './TodoSearch.css';
 import React from "react";
-import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
 
-function TodoSearch() {
-    const {searchValue, setSearchValue} = React.useContext(TodoContext) as TodoContextType;
+interface TodoSearchType {
+    searchValue :string,
+    setSearchValue :React.Dispatch<React.SetStateAction<string>>,
+}
 
+function TodoSearch({searchValue, setSearchValue} : TodoSearchType) {
     return (
         <div className="search" >
             <input

@@ -1,11 +1,17 @@
 import './TodoContainer.css';
 import {TodoItem} from "../TodoItem/TodoItem";
 import React from "react";
-import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
-import {visibleTodos} from "../Todo/Todo";
+import {Todo, visibleTodos} from "../Todo/Todo";
 
-function TodoContainer() {
-  const {loading, error, todos, searchValue} = React.useContext(TodoContext) as TodoContextType;
+interface TodoContainerType {
+  loading :boolean,
+  error :boolean,
+  todos :Todo[],
+  searchValue :string,
+  setTodos :React.Dispatch<React.SetStateAction<Todo[]>>,
+}
+
+function TodoContainer({loading, error, todos, searchValue, setTodos} : TodoContainerType) {
 
   return (
     <ul className='todo_container'>
@@ -17,6 +23,7 @@ function TodoContainer() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            setTodos={setTodos}
           />))}
 
       {error && <p>Error al cargar la información de la aplicación</p> }

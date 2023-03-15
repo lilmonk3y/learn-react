@@ -1,5 +1,5 @@
 {
-  "homepage":"https://lilmonk3y.github.io/todo-made-in-react",
+  "homepage": "https://lilmonk3y.github.io/todo-made-in-react",
   "name": "todo-made-in-react",
   "version": "0.1.0",
   "private": true,
@@ -39,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "gh-pages": "^4.0.0"
   }
 }

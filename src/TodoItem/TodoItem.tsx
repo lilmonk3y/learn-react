@@ -1,20 +1,20 @@
 import './TodoItem.css';
 import React from "react";
 import {MdOutlineDeleteOutline} from 'react-icons/md';
-import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
+import {Todo} from "../Todo/Todo";
 
 interface TodoItemProps {
-  text: string
-  completed: boolean
+  text: string,
+  completed: boolean,
+  setTodos :React.Dispatch<React.SetStateAction<Todo[]>>,
 }
 
-function TodoItem(props: TodoItemProps) {
-  const {setTodos} = React.useContext(TodoContext) as TodoContextType;
+function TodoItem({text, completed, setTodos}: TodoItemProps) {
 
   const onSelected = () => {
     setTodos(prevTodos => (
       prevTodos.map(todo => (
-        todo.text === props.text ?
+        todo.text === text ?
           {text: todo.text, completed: !todo.completed} :
           todo
       ))
@@ -22,16 +22,16 @@ function TodoItem(props: TodoItemProps) {
   }
 
   const deleteTodo = (event: React.MouseEvent<HTMLOrSVGElement>) => {
-    setTodos((prevTodos) => prevTodos.filter(todo => !(todo.text === props.text)));
+    setTodos((prevTodos) => prevTodos.filter(todo => !(todo.text === text)));
     event.stopPropagation();
   }
 
   return (
     <li
-      className={`todo_item ${props.completed ? 'todo_item_completed' : ''}`}
+      className={`todo_item ${completed ? 'todo_item_completed' : ''}`}
       onClick={onSelected}
     >
-      <p> {props.text} </p>
+      <p> {text} </p>
 
         <MdOutlineDeleteOutline
           className='todo_item_icon'

@@ -1,16 +1,21 @@
 import ReactDOM from "react-dom";
 import './NewTodoModal.css';
-import {TodoContext, TodoContextType} from "../TodoContext/TodoContext";
 import React, {FormEvent} from "react";
+import {Todo} from "../Todo/Todo";
 
-function NewTodoModal() {
+function NewTodoModal({setModalVisible, modalVisible, setTodos} : NewTodoType) {
   return ReactDOM.createPortal(
-    <NewTodo/>,
+    <NewTodo setTodos={setTodos} setModalVisible={setModalVisible} modalVisible={modalVisible} />,
     document.getElementById('modal') as HTMLElement);
 }
 
-function NewTodo() {
-  const {modalVisible, setModalVisible, setTodos} = React.useContext(TodoContext) as TodoContextType;
+interface NewTodoType {
+  setModalVisible :React.Dispatch<React.SetStateAction<boolean>>,
+  modalVisible : boolean,
+  setTodos :React.Dispatch<React.SetStateAction<Todo[]>>,
+}
+
+function NewTodo({modalVisible, setModalVisible, setTodos} : NewTodoType) {
 
   const closeModal = () => setModalVisible(false);
 
@@ -57,4 +62,6 @@ function NewTodo() {
   );
 }
 
-export {NewTodoModal}
+export {NewTodoModal};
+
+export type {NewTodoType};
