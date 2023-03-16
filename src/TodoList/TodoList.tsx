@@ -1,4 +1,4 @@
-import './TodoContainer.css';
+import './TodoList.css';
 import React, {ReactElement, ReactNode} from "react";
 import {Todo} from "../Todo/Todo";
 
@@ -36,6 +36,7 @@ interface TodoListType {
 }
 
 type ListRender = (todo : Todo) => ReactNode;
+
 function renderFunc(render: ListRender | undefined, children: ListRender | undefined) : ListRender {
     return render ? (render as ListRender) : (children as ListRender);
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import {Title} from "../Title/Title";
-import {TodoSearch} from "../TodoSearch/TodoSearch";
-import {ErrorList, LoadingList, TodoList, EmptyList, PlaceholderList} from "../TodoContainer/TodoList";
+import {Title} from "../TodoHeader/Title/Title";
+import {TodoSearch} from "../TodoHeader/TodoSearch/TodoSearch";
+import {ErrorList, LoadingList, TodoList, EmptyList, PlaceholderList} from "../TodoList/TodoList";
 import {TodoAdd} from "../TodoAdd/TodoAdd";
 import useTodos from "./useTodos";
 import {TodoItem} from "../TodoItem/TodoItem";
 import {visibleTodos} from "../Todo/Todo";
+import TodoHeader from "../TodoHeader/TodoHeader";
 
 function App() {
   const {
@@ -22,9 +23,10 @@ function App() {
 
   return (
   <>
-      <Title todos={todos}/>
-
-      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+      <TodoHeader loading={loading}>
+          <Title todos={todos} />
+          <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+      </TodoHeader>
 
       <TodoList
           loading={loading}
@@ -35,13 +37,6 @@ function App() {
           onLoading={() => <LoadingList/>}
           onEmpty={() => <EmptyList searchPhrase={searchValue}/>}
           onFirstTodo={() => <PlaceholderList/>}
-          // render={todo => (
-          //     <TodoItem
-          //         key={todo.text}
-          //         text={todo.text}
-          //         completed={todo.completed}
-          //         setTodos={setTodos}
-          //     />)}
       >
           {todo => (
               <TodoItem
