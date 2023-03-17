@@ -3,26 +3,27 @@ import './NewTodoModal.css';
 import React, {FormEvent} from "react";
 import {Todo} from "../Todo/Todo";
 
-function NewTodoModal({setModalVisible, modalVisible, setTodos} : NewTodoType) {
-  return ReactDOM.createPortal(
-    <NewTodo setTodos={setTodos} setModalVisible={setModalVisible} modalVisible={modalVisible} />,
-    document.getElementById('modal') as HTMLElement);
-}
-
 interface NewTodoType {
   setModalVisible :React.Dispatch<React.SetStateAction<boolean>>,
   modalVisible : boolean,
-  setTodos :React.Dispatch<React.SetStateAction<Todo[]>>,
+  todos : Todo[],
+  setTodos : (todos : Todo[]) => void,
 }
 
-function NewTodo({modalVisible, setModalVisible, setTodos} : NewTodoType) {
+function NewTodoModal({setModalVisible, modalVisible, todos, setTodos} : NewTodoType) {
+  return ReactDOM.createPortal(
+    <NewTodo todos={todos} setTodos={setTodos} setModalVisible={setModalVisible} modalVisible={modalVisible} />,
+    document.getElementById('modal') as HTMLElement);
+}
+
+function NewTodo({modalVisible, setModalVisible, todos, setTodos} : NewTodoType) {
 
   const closeModal = () => setModalVisible(false);
 
   const addTodo = () => {
     let input = document.getElementById('modal_input') as HTMLInputElement;
 
-    setTodos(prevState => prevState.concat([{text: input.value, completed: false}]));
+    setTodos(todos.concat([{text: input.value, completed: false}]));
 
     setModalVisible(false);
   }

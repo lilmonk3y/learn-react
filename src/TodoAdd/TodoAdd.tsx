@@ -6,10 +6,11 @@ import {Todo} from "../Todo/Todo";
 interface TodoAddType {
     setModalVisible :React.Dispatch<React.SetStateAction<boolean>>,
     modalVisible : boolean,
-    setTodos :React.Dispatch<React.SetStateAction<Todo[]>>,
+    todos : Todo[],
+    setTodos : (todos : Todo[]) => void,
 }
 
-function TodoAdd({ setModalVisible, setTodos, modalVisible } : TodoAddType) {
+function TodoAdd({ modalVisible, setModalVisible, todos, setTodos  } : TodoAddType) {
   return (
     <>
       <button
@@ -18,7 +19,7 @@ function TodoAdd({ setModalVisible, setTodos, modalVisible } : TodoAddType) {
       >
         +
       </button>
-      <NewTodoModal setTodos={setTodos} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <NewTodoModal todos={todos} setTodos={setTodos} modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </>
   );
 }

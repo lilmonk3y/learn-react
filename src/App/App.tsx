@@ -14,11 +14,11 @@ function App() {
       loading,
       error,
       todos,
-      setTodos,
       searchValue,
       setSearchValue,
       modalVisible,
       setModalVisible,
+      saveTodos,
   } = useTodos();
 
   return (
@@ -43,11 +43,12 @@ function App() {
                   key={todo.text}
                   text={todo.text}
                   completed={todo.completed}
-                  setTodos={setTodos}
+                  todos={todos}
+                  setTodos={saveTodos}
               />)}
       </TodoList>
 
-      <TodoAdd setModalVisible={setModalVisible} setTodos={setTodos} modalVisible={modalVisible} />
+      <TodoAdd setModalVisible={setModalVisible} todos={todos} setTodos={saveTodos} modalVisible={modalVisible} />
   </>
   );
 }

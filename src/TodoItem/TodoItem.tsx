@@ -6,23 +6,23 @@ import {Todo} from "../Todo/Todo";
 interface TodoItemProps {
   text: string,
   completed: boolean,
-  setTodos :React.Dispatch<React.SetStateAction<Todo[]>>,
+  todos : Todo[],
+  setTodos : (todos : Todo[]) => void,
 }
 
-function TodoItem({text, completed, setTodos}: TodoItemProps) {
+function TodoItem({text, completed, todos, setTodos}: TodoItemProps) {
 
   const onSelected = () => {
-    setTodos(prevTodos => (
-      prevTodos.map(todo => (
+    setTodos(todos.map(todo => (
         todo.text === text ?
           {text: todo.text, completed: !todo.completed} :
           todo
       ))
-    ));
+    );
   }
 
   const deleteTodo = (event: React.MouseEvent<HTMLOrSVGElement>) => {
-    setTodos((prevTodos) => prevTodos.filter(todo => !(todo.text === text)));
+    setTodos(todos.filter(todo => !(todo.text === text)));
     event.stopPropagation();
   }
 
@@ -35,7 +35,7 @@ function TodoItem({text, completed, setTodos}: TodoItemProps) {
 
         <MdOutlineDeleteOutline
           className='todo_item_icon'
-          onClick={(event) => deleteTodo(event)}
+          onClick={deleteTodo}
         />
     </li>
   );

@@ -3,7 +3,7 @@ import {Todo} from "../Todo/Todo";
 
 const localStorageKey = 'MY_TODOS_V1';
 
-const initialValue = [
+const initialValue : Todo[] = [
   {text:"comprar lechuga", completed: false},
   {text:"comprar papa", completed: true},
   {text:"comprar tomate", completed: false}];
@@ -32,17 +32,20 @@ function useLocalStorage() {
         console.log('failed to load data with error: ' + error);
         setError(true);
       }
-    }, 2000);
+    }, 1000);
   });
 
-  const saveItem = (items :any) => localStorage.setItem(localStorageKey, JSON.stringify(items));
+  const saveItem = (items : Todo[]) => {
+    localStorage.setItem(localStorageKey, JSON.stringify(items));
+    setItem(items);
+  }
 
   return {
     error,
     loading,
     item,
-    saveItem
+    saveItem,
   };
 }
 
-export {useLocalStorage}
+export {useLocalStorage, localStorageKey}
