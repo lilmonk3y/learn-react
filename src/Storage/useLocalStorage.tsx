@@ -12,6 +12,7 @@ function useLocalStorage() {
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [item, setItem] = React.useState(initialValue);
+  const [sincronized, setSincronized] = React.useState(true);
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -28,16 +29,22 @@ function useLocalStorage() {
 
         setItem(parsedItem);
         setLoading(false);
+        setSincronized(true);
       } catch(error) {
         console.log('failed to load data with error: ' + error);
         setError(true);
       }
     }, 1000);
-  });
+  }, [sincronized]);
 
   const saveItem = (items : Todo[]) => {
     localStorage.setItem(localStorageKey, JSON.stringify(items));
     setItem(items);
+  }
+
+  const synchronize = () => {
+    setLoading(true);
+    setSincronized(false);
   }
 
   return {
@@ -45,6 +52,7 @@ function useLocalStorage() {
     loading,
     item,
     saveItem,
+    synchronize,
   };
 }
 

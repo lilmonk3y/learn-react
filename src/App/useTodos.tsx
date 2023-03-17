@@ -3,7 +3,7 @@ import React from 'react';
 import {useLocalStorage} from "../Storage/useLocalStorage";
 
 function useTodos(){
-    const { loading, error, item: todos, saveItem :saveTodos } = useLocalStorage();
+    const { loading, error, item: todos, saveItem :saveTodos, synchronize } = useLocalStorage();
     const [searchValue, setSearchValue] = React.useState('');
     const [modalVisible, setModalVisible] = React.useState(false);
 
@@ -16,6 +16,7 @@ function useTodos(){
         modalVisible,
         setModalVisible,
         saveTodos,
+        synchronizeTodos : synchronize,
     }
 }
 
