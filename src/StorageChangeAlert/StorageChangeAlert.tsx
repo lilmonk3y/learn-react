@@ -1,13 +1,9 @@
+import './StorageChange.css';
 import React from 'react';
-import {withStorageListener} from "./withStorageListener";
+import {useStorageListener} from "./useStorageListener";
 
-
-interface ToggleComponent {
-    show : boolean,
-    toggle : () => void,
-}
-
-function StorageChangeAlert({show, toggle} : ToggleComponent) {
+function StorageChangeAlert({synchronizeTodos} : {synchronizeTodos : () => void}) {
+    const {show, toggle} = useStorageListener(synchronizeTodos);
     if(!show)
         return <></>;
 
@@ -15,19 +11,16 @@ function StorageChangeAlert({show, toggle} : ToggleComponent) {
 
     return (
 
-        <>
-            <p>Hubo cambios sobre los todos en otra pestaña de tu navegador. ¡Por favor actualiza tu pestaña!</p>
-            <button
-                onClick={onClickAction}
-            >
-                Actualizar esta pestaña
-            </button>
-        </>
+        <div className='StorageChange'>
+            <div className='StorageChange-container'>
+                <p>Hubo cambios sobre los todos en otra pestaña de tu navegador.</p>
+                <p>¡Por favor actualiza tu pestaña!</p>
+                <button className='StorageChange-button StorageChange-button--add' onClick={onClickAction}>
+                    Actualizar
+                </button>
+            </div>
+        </div>
     );
 }
 
-const StorageChangeAlertWithListener = withStorageListener(StorageChangeAlert);
-
-export default StorageChangeAlertWithListener;
-
-export type {ToggleComponent};
+export default StorageChangeAlert;

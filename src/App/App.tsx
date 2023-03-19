@@ -8,7 +8,7 @@ import useTodos from "./useTodos";
 import {TodoItem} from "../TodoItem/TodoItem";
 import {visibleTodos} from "../Todo/Todo";
 import TodoHeader from "../TodoHeader/TodoHeader";
-import StorageChangeAlertWithListener from "../StorageChangeAlert/StorageChangeAlert";
+import StorageChangeAlert from "../StorageChangeAlert/StorageChangeAlert";
 
 function App() {
   const {
@@ -50,7 +50,7 @@ function App() {
               />)}
       </TodoList>
 
-      <StorageChangeAlertWithListener synchronizeTodos={synchronizeTodos} />
+      <StorageChangeAlert synchronizeTodos={synchronizeTodos} />
 
       <TodoAdd setModalVisible={setModalVisible} todos={todos} setTodos={saveTodos} modalVisible={modalVisible} />
   </>
