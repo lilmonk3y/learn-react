@@ -1,7 +1,7 @@
 {
-  "homepage": "https://lilmonk3y.github.io/todo-made-in-react",
-  "name": "todo-made-in-react",
-  "version": "0.1.0",
+  "homepage": "https://lilmonk3y.github.io/learn-react",
+  "name": "learn-react",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "@types/node": "^16.11.47",
@@ -19,7 +19,9 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "preclean-deploy": "npm run build",
+    "clean-deploy": "gh-pages-clean gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
