@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/todo-made-in-react/static/css/main.c6377c56.css",
+    "main.js": "/todo-made-in-react/static/js/main.01239e70.js",
+    "index.html": "/todo-made-in-react/index.html",
+    "main.c6377c56.css.map": "/todo-made-in-react/static/css/main.c6377c56.css.map",
+    "main.01239e70.js.map": "/todo-made-in-react/static/js/main.01239e70.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c6377c56.css",
+    "static/js/main.01239e70.js"
+  ]
+}
