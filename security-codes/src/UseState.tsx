@@ -5,7 +5,12 @@ interface UseStateType {
 }
 
 const UseState = ({name} : UseStateType) => {
-    const [error, setError] = React.useState(false);
+    const [error] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
+
+    React.useEffect(() => {
+        setTimeout(() => setLoading(false), 1000);
+    }, [loading]);
 
     return (
         <div>
@@ -13,11 +18,12 @@ const UseState = ({name} : UseStateType) => {
             <p>Por favor escribe el código de seguridad</p>
 
             { error && <p> Error: El código ingresado es incorrecto </p> }
+            { loading && <p> Cargando... </p> }
 
             <div className='security-code'>
                 <input placeholder='Código de seguridad'/>
                 <button
-                    onClick={() => setError(prevState => !prevState)}
+                    onClick={() => setLoading(true)}
                 >
                     Comprobar
                 </button>

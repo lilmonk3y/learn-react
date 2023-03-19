@@ -6,6 +6,7 @@ interface ClassStateProps {
 
 interface ClassStateState {
     error: boolean,
+    loading: boolean,
 }
 
 class ClassState extends React.Component<ClassStateProps, ClassStateState> {
@@ -14,7 +15,14 @@ class ClassState extends React.Component<ClassStateProps, ClassStateState> {
 
         this.state = {
             error: false,
+            loading: false,
         };
+    }
+
+    componentDidUpdate() {
+        if(this.state.loading) {
+            setTimeout( () => this.setState({loading: false}), 1000);
+        }
     }
 
     render() {
@@ -25,10 +33,12 @@ class ClassState extends React.Component<ClassStateProps, ClassStateState> {
 
                 { this.state.error && <p> Error: El código ingresado es incorrecto </p> }
 
+                { this.state.loading && <p> Cargando... </p> }
+
                 <div className='security-code'>
                     <input placeholder='Código de seguridad'/>
                     <button
-                        onClick={() => this.setState(prevState => ({error: !prevState.error}))}
+                        onClick={() => this.setState({loading: true})}
                     >
                         Comprobar
                     </button>
