@@ -4,12 +4,21 @@ interface UseStateType {
     name : string,
 }
 
+const SECURITY_CODE = 'UseState';
+
 const UseState = ({name} : UseStateType) => {
-    const [error] = React.useState(false);
+    const [value, setValue] = React.useState('');
+    const [error, setError] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
 
     React.useEffect(() => {
-        setTimeout(() => setLoading(false), 1000);
+        setTimeout(() => {
+            setError(false);
+            setLoading(false);
+
+            if( value.length !== 0 && value !== SECURITY_CODE)
+                setError(true);
+        }, 1000);
     }, [loading]);
 
     return (
@@ -17,11 +26,14 @@ const UseState = ({name} : UseStateType) => {
             <h1>Eliminar {name}</h1>
             <p>Por favor escribe el código de seguridad</p>
 
-            { error && <p> Error: El código ingresado es incorrecto </p> }
+            { !loading && error && <p> Error: El código ingresado es incorrecto </p> }
             { loading && <p> Cargando... </p> }
 
             <div className='security-code'>
-                <input placeholder='Código de seguridad'/>
+                <input
+                    value={value}
+                    onInput={(event : React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
+                    placeholder='Código de seguridad'/>
                 <button
                     onClick={() => setLoading(true)}
                 >
