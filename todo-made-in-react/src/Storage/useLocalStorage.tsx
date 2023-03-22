@@ -76,14 +76,12 @@ function useLocalStorage() {
         onSave(items);
     }
 
-    const synchronize = () => onSynchronize();
-
     return {
         error: state.error,
         loading: state.loading,
         item: state.item,
         saveItem,
-        synchronize,
+        synchronize: onSynchronize,
     };
 }
 
