@@ -89,12 +89,14 @@ function useLocalStorage() {
 
 type ReducerActionType = {type: ActionTypes, payload?: Todo[]};
 
-const reducerObject = (state: UseLocalStorageStateType, action: ReducerActionType) => ({
+type ReducerObject = {[key in ActionTypes]: UseLocalStorageStateType};
+
+const reducerObject = (state: UseLocalStorageStateType, action: ReducerActionType): ReducerObject => ({
     [ActionTypes.SUCCESS]: {
         ...state,
         loading: false,
         synchronized: true,
-        items: (action.payload as Todo[]),
+        item: (action.payload as Todo[])
     },
     [ActionTypes.ERROR]: {
         ...state,
@@ -102,7 +104,7 @@ const reducerObject = (state: UseLocalStorageStateType, action: ReducerActionTyp
     },
     [ActionTypes.SAVE]: {
         ...state,
-        items: (action.payload as Todo[]),
+        item: (action.payload as Todo[])
     },
     [ActionTypes.SYNCHROSNIZE]: {
         ...state,
