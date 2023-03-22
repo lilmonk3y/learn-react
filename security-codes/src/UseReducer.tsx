@@ -125,9 +125,13 @@ const states = (state : StateType, payload?: {value: string}) : { [key in Action
     [Action.CODE_INPUT]: {...state, value: (payload?.value as string)},
 })
 
-const reducer = (state: StateType, action: {type: Action, payload?: {value: string}}) : StateType =>
-    action ?
-        states(state, action.payload)[action.type] :
-        state;
+const reducer = (state: StateType, action: {type: Action, payload?: {value: string}}) : StateType => {
+    const stateForAction = states(state, action.payload)[action.type];
+    if (stateForAction) {
+        return stateForAction;
+    } else {
+        throw new Error('State for action not found: ' + action.type);
+    }
+}
 
 export {UseReducer};
