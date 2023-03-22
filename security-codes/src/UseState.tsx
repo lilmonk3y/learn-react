@@ -1,10 +1,8 @@
 import React from 'react';
 
 interface UseStateType {
-    name : string,
+    name? : string,
 }
-
-const SECURITY_CODE = 'UseState';
 
 const UseState = ({name} : UseStateType) => {
     const [state, setState] = React.useState({
@@ -45,9 +43,9 @@ const UseState = ({name} : UseStateType) => {
 
     React.useEffect(() => {
         setTimeout(() => {
-            if( state.loading && state.value !== SECURITY_CODE) {
+            if( state.loading && state.value !== name) {
                 onFailedCodeInput();
-            } else if (state.loading && state.value === SECURITY_CODE){
+            } else if (state.loading && state.value === name){
                 onSuccessfulCodeInput();
             }
         }, 1000);
@@ -56,7 +54,6 @@ const UseState = ({name} : UseStateType) => {
     if(!state.confirmed && !state.deleted){
         return (
             <div>
-                <h1>Eliminar {name}</h1>
                 <p>Por favor escribe el código de seguridad</p>
 
                 { !state.loading && state.error && <p> Error: El código ingresado es incorrecto </p> }

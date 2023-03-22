@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface PropsType {
-    name : string,
+    name? : string,
 }
 
 interface StateType {
@@ -11,8 +11,6 @@ interface StateType {
     confirmed: boolean,
     deleted: boolean,
 }
-
-const SECURITY_CODE = 'UseReducer';
 
 enum Action {
     FAILED_CODE_INPUT,
@@ -63,9 +61,9 @@ const UseReducer = ({name} : PropsType) => {
 
     React.useEffect(() => {
         setTimeout(() => {
-            if( state.loading && state.value !== SECURITY_CODE) {
+            if( state.loading && state.value !== name) {
                 onFailedCodeInput();
-            } else if (state.loading && state.value === SECURITY_CODE){
+            } else if (state.loading && state.value === name){
                 onSuccessfulCodeInput();
             }
         }, 1000);
@@ -74,7 +72,6 @@ const UseReducer = ({name} : PropsType) => {
     if(!state.confirmed && !state.deleted){
         return (
             <div>
-                <h1>Eliminar {name}</h1>
                 <p>Por favor escribe el código de seguridad</p>
 
                 { !state.loading && state.error && <p> Error: El código ingresado es incorrecto </p> }

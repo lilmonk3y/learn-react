@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ClassStateProps {
-    name: string,
+    name?: string,
 }
 
 interface ClassStateState {
@@ -11,8 +11,6 @@ interface ClassStateState {
     confirmed: boolean,
     deleted: boolean,
 }
-
-const SECURITY_CODE = 'ClassState';
 
 class ClassState extends React.Component<ClassStateProps, ClassStateState> {
     constructor(props: ClassStateProps) {
@@ -30,7 +28,7 @@ class ClassState extends React.Component<ClassStateProps, ClassStateState> {
     componentDidUpdate() {
         if(this.state.loading) {
             setTimeout( () => {
-                if(SECURITY_CODE !== this.state.value) {
+                if(this.props?.name !== this.state.value) {
                     this.setState({error: true, loading: false});
                 } else {
                     this.setState({confirmed: true, loading: false});
@@ -43,7 +41,6 @@ class ClassState extends React.Component<ClassStateProps, ClassStateState> {
         if(!this.state.confirmed && !this.state.deleted) {
             return (
                 <div>
-                    <h1>Eliminar {this.props.name}</h1>
                     <p>Por favor escribe el código de seguridad</p>
 
                     {!this.state.loading && this.state.error && <p> Error: El código ingresado es incorrecto </p>}
