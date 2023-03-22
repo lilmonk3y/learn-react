@@ -12,39 +12,56 @@ function useLocalStorage() {
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [item, setItem] = React.useState(initialValue);
-  const [sincronized, setSincronized] = React.useState(true);
+  const [synchronized, setSynchronized] = React.useState(true);
+
+  const onSuccess = (parsedItem: Todo[]) => {
+    setError(false);
+    setItem(parsedItem);
+    setSynchronized(true);
+    setLoading(false);
+  }
+
+  const onError = () => {
+    setError(true);
+  }
+
+  const onSave = (items: Todo[]) => {
+    setItem(items);
+  }
+
+  const onSynchronize = () => {
+    setLoading(true);
+    setSynchronized(false);
+  }
 
   React.useEffect(() => {
     setTimeout(() => {
       try {
         const localStorageItem = localStorage.getItem(localStorageKey);
-        let parsedItem :Todo[];
+        let parsedItem: Todo[];
 
         if (!localStorageItem) {
           localStorage.setItem(localStorageKey, JSON.stringify(initialValue));
           parsedItem = initialValue;
         } else {
-          parsedItem = JSON.parse(localStorageItem as string) as Array<Todo>;
+          parsedItem = JSON.parse(localStorageItem as string) as Todo[];
         }
 
-        setItem(parsedItem);
-        setLoading(false);
-        setSincronized(true);
+        onSuccess(parsedItem);
       } catch(error) {
         console.log('failed to load data with error: ' + error);
-        setError(true);
+        onError();
       }
     }, 1000);
-  }, [sincronized]);
+  }, [synchronized]);
 
   const saveItem = (items : Todo[]) => {
     localStorage.setItem(localStorageKey, JSON.stringify(items));
-    setItem(items);
+    onSave(items);
   }
 
   const synchronize = () => {
-    setLoading(true);
-    setSincronized(false);
+    onSynchronize();
   }
 
   return {
