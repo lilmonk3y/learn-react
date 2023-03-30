@@ -41,13 +41,14 @@ function App() {
           onEmpty={() => <EmptyList searchPhrase={searchValue}/>}
           onFirstTodo={() => <PlaceholderList/>}
       >
-          {todo => (
+          {(todo , style)=> (
               <TodoItem
                   key={todo.text}
                   text={todo.text}
                   completed={todo.completed}
                   todos={todos}
                   setTodos={saveTodos}
+                  style={style}
               />)}
       </TodoList>
 

@@ -1,6 +1,7 @@
 import './TodoList.css';
 import React, {ReactNode} from "react";
 import {Todo} from "../Todo/Todo";
+import {TodoListTransition} from "./TodoListTransition";
 
 function ErrorList() {
   return <p>Error al cargar la información de la aplicación</p>;
@@ -27,11 +28,11 @@ interface TodoListType {
   onEmpty : () => ReactNode,
   onFirstTodo : () => ReactNode,
   totalTodos : Todo[],
-  render? : (todo : Todo) => ReactNode,
-  children? : (todo : Todo) => ReactNode,
+  render? : (todo : Todo, style?: any) => ReactNode,
+  children? : (todo : Todo, style?: any) => ReactNode,
 }
 
-type ListRender = (todo : Todo) => ReactNode;
+type ListRender = (todo : Todo, style: any) => ReactNode;
 
 function renderFunc(render: ListRender | undefined, children: ListRender | undefined) : ListRender {
     return render ? (render as ListRender) : (children as ListRender);
@@ -49,13 +50,18 @@ function TodoList({
                     children,
                     onFirstTodo
                   } : TodoListType) {
-  return (
+    return (
     <ul className='todo_container'>
       {error && onError()}
       {loading && !error && onLoading()}
       {!loading && !error && todos.length === 0 && totalTodos.length !== 0 && onEmpty()}
       {!loading && !error && todos.length === 0 && totalTodos.length === 0 && onFirstTodo()}
-      {!loading && !error && todos.map(renderFunc(render, children))}
+      {!loading && !error &&
+          <TodoListTransition
+              render={style =>
+                  todos.map(todo => renderFunc(render, children)(todo, style))}
+          />
+      }
     </ul>
   );
 }

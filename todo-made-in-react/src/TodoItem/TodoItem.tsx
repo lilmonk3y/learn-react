@@ -8,9 +8,10 @@ interface TodoItemProps {
   completed: boolean,
   todos : Todo[],
   setTodos : (todos : Todo[]) => void,
+  style?: any,
 }
 
-function TodoItem({text, completed, todos, setTodos}: TodoItemProps) {
+function TodoItem({text, completed, todos, setTodos, style}: TodoItemProps) {
 
   const onSelected = () => {
     setTodos(todos.map(todo => (
@@ -30,6 +31,7 @@ function TodoItem({text, completed, todos, setTodos}: TodoItemProps) {
     <li
       className={`todo_item ${completed ? 'todo_item_completed' : ''}`}
       onClick={onSelected}
+      style={style}
     >
       <p> {text} </p>
 
