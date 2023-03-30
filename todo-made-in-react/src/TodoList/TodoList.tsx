@@ -1,10 +1,6 @@
 import './TodoList.css';
-import React, {ReactElement, ReactNode} from "react";
+import React, {ReactNode} from "react";
 import {Todo} from "../Todo/Todo";
-
-function LoadingList() {
-  return <p>Loading ...</p>;
-}
 
 function ErrorList() {
   return <p>Error al cargar la información de la aplicación</p>;
@@ -64,4 +60,4 @@ function TodoList({
   );
 }
 
-export {TodoList, ErrorList, LoadingList, EmptyList, PlaceholderList}
+export {TodoList, ErrorList, EmptyList, PlaceholderList}

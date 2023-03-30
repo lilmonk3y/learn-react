@@ -68,7 +68,7 @@ function useLocalStorage() {
                 console.log('failed to load data with error: ' + error);
                 onError();
             }
-        }, 1000);
+        }, 3000);
     }, [state.synchronized]);
 
     const saveItem = (items : Todo[]) => {
